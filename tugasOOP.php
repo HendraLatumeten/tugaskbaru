@@ -1,5 +1,24 @@
 <?php 
-include 'koneksi.php';
+require_once ('koneksi.php');
+if(isset($_POST) && !empty($_POST)){
+  $kode = $_POST['a'];
+  $judul = $_POST['b'];
+  $pengarang = $_POST['c'];
+  $penerbit =$_POST['d'];
+  $tahun = $_POST['e'];
+  $del = $koneksi->delete($kode);
+  $res = $koneksi->create($kode,$judul,$pengarang,$penerbit,$tahun);
+  if ($res) {
+ echo "<script>alert('Data Berhasil Disimpan');</script>";;
+  }else{
+    echo "gagal";
+  }
+
+}
+
+
+
+
 
 $tampil= $koneksi->read(); 
 // $hapus= $koneksi->delete(); 
@@ -31,7 +50,10 @@ $tampil= $koneksi->read();
   </body>
 </html>
 
-
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 10px; margin-bottom: 5px;">
+  Tambah Data
+</button>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -59,14 +81,74 @@ foreach($tampil as $tm){
 			<td><?php echo $tm['penerbit']; ?>	</td>
 			<td><?php echo $tm['tahun_terbit']; ?>	</td>
       <td>
-        <a type="submit" class="btn btn-danger"href="proses.php?kode_buku=<?php echo $tm['kode_buku']; ?>&aksi=hapus">Hapus</a>
-        <a type="submit" class="btn btn-danger" href='tugasOOP.php?kode_buku=$tm[kode_buku]'>edit</a>      
+        <a type="submit" name="hapus" onclick="return confirm('Yakin Hapus?')"class="btn btn-danger"href="delete.php?kode_buku=<?php echo $tm['kode_buku']; ?>">Hapus</a>
+        <a type="submit" class="btn btn-danger" href='tugasOOP.php?kode_buku=$tm[kode_buku]'>edit</a>
+        
     
       </td>
     </tr>
 
 <?php $no++;	} ?>
-</table>
+</tbody>
 </table>	
-<!-- <a href='form-edit.php?id_mahasiswa=$row[id_mahasiswa]'>Edit</a>
-                <a href='delete.php?id_mahasiswa=$row[id_mahasiswa]'>Delete</a> -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Form Input Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+ <form class="form" method="POST">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Kode Buku</label>
+    <input type="number" name="a" class="form-control" id="exampleInputEmail1"placeholder="masukan kode buku">
+  
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Judul Buku</label>
+    <input type="text"  name="b" class="form-control" id="exampleInputEmail1"placeholder="masukan judul buku">
+  
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Pengarang</label>
+    <input type="text" name="c" class="form-control" id="exampleInputEmail1"placeholder="pengarang">
+  
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Penerbit</label>
+    <input type="text" name="d" class="form-control" id="exampleInputEmail1"placeholder="Penerbit">
+  
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Tahun Terbit</label>
+    <input type="number" name="e" class="form-control" id="exampleInputEmail1"placeholder="Tahun Terbit">
+  
+  </div>
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit"  class="btn btn-primary">Submit</button>
+
+
+      </div>
+ 
+</form>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+       </body>
+       </html>       
