@@ -8,10 +8,17 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    
+    <style>
+      h1 {
+      text-align: center;
+      }
+    </style>
     <title>form edit</title>
   </head>
   <body>
     <h1><u>FORM EDIT</u></h1> <br>
+    <div class="container">
     <form>
   <div class="form-group">
     <label>Kode Buku</label>
@@ -36,6 +43,7 @@
 
   <button class="btn btn-primary">Save</button>
 </form>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
